@@ -1,0 +1,102 @@
+# HaruxSky Configuration Example
+# Copy this to config.yaml or use environment variables
+#
+# Customization is the core feature. Edit the prompts section below (or add your own)
+# to make posts and replies sound exactly like you want.
+
+bluesky:
+  handle: "yourhandle.bsky.social"
+  # Generate an App Password at https://bsky.app/settings/app-passwords
+  # NEVER use your main account password
+  app_password: "xxxx-xxxx-xxxx-xxxx"
+
+llm:
+  # Currently optimized for xAI Grok
+  provider: "xai"           # xai | openai | anthropic (future)
+  api_key: "your-xai-or-openai-key-here"
+  model: "grok-3"           # or gpt-4o, etc.
+
+posting:
+  enabled: true
+  feeds:                    # RSS/Atom feeds to monitor for content
+    - "https://example.com/feed.xml"
+    - "https://news.example.org/rss"
+  max_posts_per_run: 1
+  generate_images: false    # set true to try scraping og:image (slower, more requests)
+  max_graphemes: 265
+
+engagement:
+  enabled: true
+  replies_per_run: 30       # How many replies to attempt
+  min_likes_for_reply: 0    # 0 = very broad (good for new accounts)
+  min_followers: 0
+  skip_political: true
+
+safety:
+  # Extra keywords/phrases to always skip (case insensitive)
+  banned_keywords:
+    - "election"
+    - "trump"
+    - "biden"
+    # add more as needed
+
+schedule:
+  # For documentation only — run via cron / task scheduler / GitHub Actions
+  # Example: every 4 hours for posting + engagement
+  post_interval_hours: 4
+  engage_interval_hours: 2
+
+logging:
+  level: "INFO"   # DEBUG for more detail
+
+# =====================
+# CUSTOMIZATION (most important section)
+# =====================
+# This is where you make it sound like YOU.
+# You can override the prompts completely or just provide a "style" description
+# that gets injected into the defaults.
+
+prompts:
+  # General style/persona injected into both post and reply generation.
+  # Be as specific as you want. Examples:
+  #   "witty and slightly sarcastic tech commentator"
+  #   "thoughtful, optimistic, long-form explainer who loves analogies"
+  #   "dry humor, minimalist, no fluff, direct"
+  style: "thoughtful and engaging with a bit of personality, like a curious friend who reads a lot"
+
+  post:
+    # Full control over how articles become posts.
+    # Available variables: {title}, {summary}, {link} (if available)
+    # You can replace this entire prompt with your own if you want total control.
+    prompt: |
+      Write a good, thoughtful Bluesky post (or short thread) based on this story.
+      Style: {style}
+
+      Rules:
+      - Natural, engaging, human tone. No corporate speak.
+      - 150-250 words total if making a thread.
+      - Do NOT mention the source or include the link in the text.
+      - Use paragraphs for readability.
+      - End with a light question or observation when it fits.
+
+      Title: {title}
+      Summary: {summary}
+
+      Return only the post text.
+
+  reply:
+    # Full control over reply style.
+    # Available variables: {post_text}, {author_handle}
+    prompt: |
+      Write a very short, casual, natural reply (1-2 sentences max) that directly responds to the topic.
+      Style: {style}
+
+      Strict rules:
+      - Stay 100% apolitical and safe. No politics, parties, or controversial hot takes.
+      - Be specific to what the person actually posted about — reference the topic.
+      - Vary your wording. Never use the same generic phrase twice.
+      - Friendly, curious, or lightly insightful. No emojis unless it really fits the style.
+
+      Post by @{author_handle}: {post_text}
+
+      Reply:
