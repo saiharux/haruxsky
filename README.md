@@ -23,14 +23,36 @@ The prompts themselves are now high-quality baked-in defaults (thoughtful, neutr
 
 Strong safety: political skip on both posting and replies, duplicate protection, rate limiting, etc.
 
-## The Real Program (HaruxSky.exe) — Recommended
+## Download & Run (Easiest)
 
-This is the main deliverable: a single ~38 MB Windows executable. No Python install, no terminal.
+**This is what most people should do:**
 
-1. Download `HaruxSky.exe` (from Releases once published, or build it yourself — see below).
-2. Double-click it.
-3. On first run: enter your Bluesky handle (e.g. yourname.bsky.social), an App Password (create at bsky.app/settings/app-passwords), and your LLM API key (xAI/Grok recommended — get at console.x.ai).
-4. It shows a loading/spinner screen, then "loads up further" into the full GUI.
+### Option A — Download the ready-made program (recommended)
+
+1. Go to the **[Releases](https://github.com/saiharux/haruxsky/releases)** page.
+2. Download the latest `HaruxSky.exe` (it's a single ~38 MB file).
+3. Double-click it.
+4. On first run it will show the login screen (enter your Bluesky handle + App Password + LLM API key).
+5. It loads up into the full GUI with live log — exactly like the developer version.
+
+Once you have the exe, you can copy it to your desktop or anywhere. No Python or command line needed.
+
+> **Note:** If there isn't a Release with the .exe attached yet, use Option B below.
+
+### Option B — Build it yourself from source (for transparency)
+
+If you want to verify the code or there is no pre-built exe yet:
+
+```powershell
+git clone https://github.com/saiharux/haruxsky
+cd haruxsky
+pip install -e ".[build]"
+python build_exe.py
+```
+
+After it finishes, the working program will be at `dist\HaruxSky.exe`. Close any running copy of HaruxSky before building (the file gets locked).
+
+Then just double-click `HaruxSky.exe` and use it the same way.
 5. **Customize**:
    - Article Sources (RSS feeds) — one URL per line. Supports any RSS (tech, blogs, Wikipedia Special:Random, etc.).
    - Check "Post articles" and/or "Send replies".
@@ -43,18 +65,7 @@ This is the main deliverable: a single ~38 MB Windows executable. No Python inst
 
 The **LOG OUT / Reconfigure Account** button in the header fully resets everything back to the login screen.
 
-### Building the .exe yourself (for transparency / updates)
-
-```bash
-git clone https://github.com/saiharux/haruxsky
-cd haruxsky
-pip install -e ".[build]"
-python build_exe.py
-```
-
-The exe lands in `dist/HaruxSky.exe`. Close any running copy of the program before building (the exe file gets locked while open).
-
-The CLI (`haruxsky` and `haruxsky-gui` commands) still exists in the source for power users who want to script or run on non-Windows.
+The CLI (`haruxsky` and `haruxsky-gui` commands after `pip install`) still exists in the source for power users who want to script or run on non-Windows / without the exe.
 
 See [examples/config.example.yaml](examples/config.example.yaml) for the full config schema (the GUI only exposes the most useful parts).
 
