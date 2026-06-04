@@ -107,6 +107,15 @@ MIT License — see LICENSE file.
 
 Use responsibly and follow Bluesky's rules. You are responsible for what your account posts and replies. The built-in filters help a lot but are not 100% foolproof.
 
+## Source Code & Building
+
+```bash
+git clone https://github.com/saiharux/haruxsky
+cd haruxsky
+```
+
+The full source is here for transparency and so you (or others) can audit / improve / build the .exe yourself.
+
 ---
 
 Made for creators who want real leverage on Bluesky without losing their voice or their account.
