@@ -29,8 +29,10 @@ Strong safety: political skip on both posting and replies, duplicate protection,
 
 ### Option A — Download the ready-made program (recommended)
 
-1. Go to the **[Releases](https://github.com/saiharux/haruxsky/releases)** page.
-2. Download the latest `HaruxSky.exe` (it's a single ~38 MB file).
+1. Go to the **[Releases](https://github.com/saiharux/haruxsky/releases)** page (or click the big "Releases" link on the right side of the repo).
+2. Download the latest `HaruxSky.exe` (v0.1.0 is the current one — single ~36 MB file).
+3. Direct download link (if you just want the file):
+   https://github.com/saiharux/haruxsky/releases/download/v0.1.0/HaruxSky.exe
 3. Double-click it.
 4. On first run it will show the login screen (enter your Bluesky handle + App Password + LLM API key).
 5. It loads up into the full GUI with live log — exactly like the developer version.
